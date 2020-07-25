@@ -1,19 +1,18 @@
 from int_PlanCuentas import ejecutar_plancuenta
 from int_Grupo import ejecutar_grupo
-from funciones import *
+from funciones import menuprincipal, valOpciones
 
 
 def ejec():
     while True:
-        paso=menu('MENU PRINCIPAL', ('GRUPOS', 'Plan cuentas', 'Salir'))
-        if menu == '0':
+        opc= menuprincipal(('GRUPOS', 'Plan cuentas', 'Salir'),'MENU PRINCIPAL')
+        if opc == '0':
             ejecutar_grupo()
-        elif menu == '1':
+        elif opc == '1':
             ejecutar_plancuenta()
-        elif menu == '2':
+        elif opc == '2':
             if valOpciones ('Salir'):
                 print('<<<Gracias por usar el Sistema>>>')
                 input('Presione enter para continuar')
-                break
-
+            break    
 ejec()

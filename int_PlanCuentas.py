@@ -1,6 +1,6 @@
 from ctr_PlanCuentas import CtrPlanCuenta
 from mod_PlanCuentas import ModPlanCuenta
-from funciones import menu
+from funciones import menu, valOpciones
 
 ctr = CtrPlanCuenta()
 def insertar(rango):
@@ -17,14 +17,14 @@ def insertar(rango):
             print('Error al grabar el Registro')
 
 def modificar():
-        idpc =  input('Ingrese id: ')
-        codigo = input('Ingrese codigo: ')
-        grupo = input('Ingrese grupo: ')
-        descripcion = input('Ingrese descripcion: ')
-        naturaleza = input('Ingrese naturaleza: ')
-        estado = input('Ingrese estado: ')
-    gru = ModPlanCuenta(id= idpc,cod=codigo,gru=grupo, des=descripcion, nat=naturaleza, est=estado)
-    if ctr.modificar(gru):
+    idpc =  input('Ingrese id: ')
+    codigo = input('Ingrese codigo: ')
+    grupo = input('Ingrese grupo: ')
+    descripcion = input('Ingrese descripcion: ')
+    naturaleza = input('Ingrese naturaleza: ')
+    estado = input('Ingrese estado: ')
+    pc = ModPlanCuenta(id= idpc,cod=codigo,gru=grupo, des=descripcion, nat=naturaleza, est=estado)
+    if ctr.modificar(pc):
         print('Registro modificado correctamente')
     else:
         print('Error al modificar el Registro')
@@ -40,16 +40,16 @@ def eliminar():
 def consultar():
     buscar = input('Ingrese nombre a buscar: ')
     gru = ctr.consulta(buscar)
-    print('Id   Codigo   Grupo   Descripcion   Naturaleza   Estado')
+    print('Id   Codigo       Grupo      Descripcion     Naturaleza    Estado')
     for registro in gru:
-        print('{:7} {:3} {:6} {:9} {:4} {:6}'.format(registro[0], registro[1], registro[2], registro[3], registro[4],registro[5],))
+        print('{:2} \t{:8} \t{:1}\t {:1} \t\t{:15}\t {:1}'.format(registro[0], registro[1], registro[2], registro[3], registro[4],registro[5],))
 
 def ejecutar_plancuenta():
     opc = ''
     while opc != '4':
-        opc = str(menu(
-            ['Ingresar', 'Modificar', 'Eliminar', 'Consultar', 'Salir'],
-            'Menu Plan de Cuentas'))
+        opc = str(menu('Menu Plan de Cuentas',
+            ('Ingresar', 'Modificar', 'Eliminar', 'Consultar', 'Salir'),
+            ))
         if opc == '0':
             print('\n<<<Insertar datos>>> ')
             valor = input('-Ingrese cantidad de datos a Ingresar')
@@ -64,7 +64,10 @@ def ejecutar_plancuenta():
             print('\n<<<Consultar datos>>>')
             consultar()
         elif opc == '4':
-            print('<<<Gracias por usar el Sistema>>>')
+            if valOpciones ('Salir'):
+                print('<<<Gracias por usar el Sistema>>>')
+            break
         elif opc != '4':
             print('Seleccione una opción correcta')
-ejecutar_plancuenta()
+
+

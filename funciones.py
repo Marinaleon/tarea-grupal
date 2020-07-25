@@ -1,4 +1,12 @@
-
+import os
+def menuprincipal(opciones, titulo):
+    print('^'*20)
+    print('{}'.format(titulo))
+    print('^'*20)
+    for op in range(0, len(opciones)):
+        print("{}) {}".format(op, opciones[op]))
+    opc = input('Elija Opcion [0...{}]: '.format(len(opciones)-1))
+    return opc
 
 def menu(titulo,opciones = ('Ingresar','Consultar','Modificar', 'Eliminar', 'Retornar al menu principal')):
     print('^'*20)

@@ -1,6 +1,6 @@
 from ctr_Grupo import CtrGrupo
 from mod_Grupo import ModGrupoCuenta
-from funciones import menu
+from funciones import menu, valOpciones
 
 ctr = CtrGrupo()
 def insertar(rango):
@@ -33,16 +33,16 @@ def eliminar():
 def consultar():
     buscar = input('Ingrese nombre a buscar: ')
     gru = ctr.consulta(buscar)
-    print('  Codigo   Descripcion')
+    print('  Codigo    Descripcion')
     for registro in gru:
-        print('{:7} {:3}'.format(registro[0], registro[1]))
+        print('{:7}\t\t {:3}'.format(registro[0], registro[1]))
 
 def ejecutar_grupo():
     opc = ''
     while opc != '4':
-        opc = str(menu(
-            ['Ingresar', 'Modificar', 'Eliminar', 'Consultar', 'Salir'],
-            'Menu Grupo'))
+        opc = str(menu('Menu Grupos',
+            ('Ingresar', 'Modificar', 'Eliminar', 'Consultar', 'Salir'),
+            ))
         if opc == '0':
             print('\n<<<Insertar datos>>> ')
             valor = input('-Ingrese cantidad de datos a Ingresar')
@@ -57,7 +57,9 @@ def ejecutar_grupo():
             print('\n<<<Consultar datos>>>')
             consultar()
         elif opc == '4':
-            print('<<<Gracias por usar el Sistema>>>')
+            if valOpciones ('Salir'):
+                print('<<<Gracias por usar el Sistema>>>')
+            break
         elif opc != '4':
             print('Seleccione una opción correcta')
-ejecutar_grupo()
+
